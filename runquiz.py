@@ -26,6 +26,7 @@ def compile_program(submission_dir):
     os.chdir(submission_dir)
     return call(gcc_comand_line.split(' '))
 
+
 def test(submission_dir):
     # set working directory
     os.chdir(submission_dir)
@@ -33,7 +34,7 @@ def test(submission_dir):
 
 
 def run_quiz(name, submission_dir):
-    print('\nAbout to run quiz for: ' + name)
+    print('\n\n\n\n\n\nAbout to run quiz for: ' + name)
     if interactive:
         asw = input('Press [ENTER] to continue or [s] to skip student: ')
         if asw.startswith('s'):
@@ -48,6 +49,7 @@ def run_quiz(name, submission_dir):
     if test(submission_dir) != 0:
         print('Testing (ITSELF) failed!')
         return 1
+    print('\nFinished for: ' + name)
     return 0
 
 
@@ -59,7 +61,7 @@ def main():
     for (n, d) in submissions:
         errors += run_quiz(n, d)
 
-    print('Done with all submissions!')
+    print('\nDone with all submissions!')
     print('ERRORS #: ', errors)
 
 
