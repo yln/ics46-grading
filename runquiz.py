@@ -5,22 +5,14 @@ from subprocess import call
 # Configure the following things before you start grading!
 interactive = True
 # Where are the submissions located?
-labdir = '/home/yln/work/ics46-grading/program1/program1submissions/Lab 1'
+labdir = '/home/yln/work/ics46-grading/quiz2/quiz2submissions/Lab 1'
 # On Windows, also add the binary libraries here
 template_files = [
-    '/home/yln/work/ics46-grading/program1/graph1.txt',
-    '/home/yln/work/ics46-grading/program1/graph2.txt',
-    '/home/yln/work/ics46-grading/program1/graph3.txt',
-    '/home/yln/work/ics46-grading/program1/input1',
-    '/home/yln/work/ics46-grading/program1/input2',
-    '/home/yln/work/ics46-grading/program1/input3',
-    '/home/yln/work/ics46-grading/program1/expected_output1',
-    '/home/yln/work/ics46-grading/program1/expected_output2',
-    '/home/yln/work/ics46-grading/program1/expected_output3'
+    '/home/yln/work/ics46-grading/quiz2/q2helper/src/test_quiz2.cpp'
 ]
 # compilation command (see what Eclipse does to get an idea)
-executable = 'reachable'
-gcc_comand_line = 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o reachable reachable.cpp -lgtest -lcourselib'
+executable = 'test_quiz2'
+gcc_comand_line = 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_quiz2 test_quiz2.cpp -lgtest -lcourselib'
 
 
 def copy_template_files(submission_dir):
@@ -59,6 +51,12 @@ def test(submission_dir):
     return call("./" + executable)
 
 
+def view(submission_dir):
+    # set working directory
+    os.chdir(submission_dir)
+    os.system("sed -n '/add_ordered_r/,$p' q2solution.hpp")
+
+
 def run_quiz(name, submission_dir):
     print('\n\n\n\n\n\nAbout to run quiz for: ' + name)
     if interactive:
@@ -71,15 +69,19 @@ def run_quiz(name, submission_dir):
     if compile_program(submission_dir) != 0:
         print('Compilation failed!')
         return 1
-    print('Compiled')
-    if run(submission_dir) != 0:
-        print('error while running')
-        return 1
-    diff(submission_dir)
-
-    # if test(submission_dir) != 0:
-    #     print('Testing (ITSELF) failed!')
+    print('Compiled\n')
+    # if run(submission_dir) != 0:
+    #     print('error while running')
     #     return 1
+    # diff(submission_dir)
+
+    if test(submission_dir) != 0:
+        print('Testing failed!\n')
+        view(submission_dir)
+        return 1
+    print('\n')
+    view(submission_dir)
+
     print('\nFinished for: ' + name)
     proc = input('Mark as processed? [ENTER]: yes, [n]: no: ')
     if not proc.startswith('n'):
