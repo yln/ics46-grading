@@ -5,14 +5,27 @@ from subprocess import call
 # Configure the following things before you start grading!
 interactive = True
 # Where are the submissions located?
-labdir = '/home/yln/work/ics46-grading/quiz2/quiz2submissions/Lab 1'
+labdir = '/home/yln/work/ics46-grading/program2/program2submissions/Lab 2'
 # On Windows, also add the binary libraries here
 template_files = [
-    '/home/yln/work/ics46-grading/quiz2/q2helper/src/test_quiz2.cpp'
+    '/home/yln/work/ics46-grading/program2/program2/src/test_priority_queue.cpp',
+    '/home/yln/work/ics46-grading/program2/program2/src/test_queue.cpp',
+    '/home/yln/work/ics46-grading/program2/program2/src/test_set.cpp',
+    '/home/yln/work/ics46-grading/program2/program2/loadpq.txt',
+    '/home/yln/work/ics46-grading/program2/program2/loadq.txt',
+    '/home/yln/work/ics46-grading/program2/program2/loadset.txt'
 ]
 # compilation command (see what Eclipse does to get an idea)
-executable = 'test_quiz2'
-gcc_comand_line = 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_quiz2 test_quiz2.cpp -lgtest -lcourselib'
+executables = [
+    'test_queue',
+    'test_priority_queue',
+    'test_set'
+]
+gcc_comand_lines = [
+    'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_queue test_queue.cpp -lgtest -lcourselib',
+    'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_priority_queue test_priority_queue.cpp -lgtest -lcourselib',
+    'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_set test_set.cpp -lgtest -lcourselib'
+]
 
 
 def copy_template_files(submission_dir):
@@ -21,12 +34,17 @@ def copy_template_files(submission_dir):
 
 
 def compile_program(submission_dir):
-    binary = os.path.join(submission_dir, executable)
-    if os.path.isfile(binary):
-        os.remove(binary)
+    binaries = [os.path.join(submission_dir, exe) for exe in executables]
+    for binary in binaries:
+        if os.path.isfile(binary):
+            os.remove(binary)
     # set working directory
     os.chdir(submission_dir)
-    return call(gcc_comand_line.split(' '))
+    for command in gcc_comand_lines:
+        retval = call(command.split(' '))
+        if retval != 0:
+            return 1
+    return 0
 
 
 def run(submission_dir):
@@ -48,13 +66,19 @@ def diff(submission_dir):
 def test(submission_dir):
     # set working directory
     os.chdir(submission_dir)
-    return call("./" + executable)
+    retval = 0
+    for exe in executables:
+        retval += call("./" + exe)
+    return retval
 
 
 def view(submission_dir):
     # set working directory
     os.chdir(submission_dir)
-    os.system("sed -n '/add_ordered_r/,$p' q2solution.hpp")
+    # os.system("sed -n '/add_ordered_r/,$p' q2solution.hpp")
+    os.system("grep -B 12 --color=always '\sdelete\s' linked_queue.hpp")
+    os.system("subl linked_queue.hpp &")
+
 
 
 def run_quiz(name, submission_dir):
