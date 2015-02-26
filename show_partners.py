@@ -1,8 +1,8 @@
 import os
 from subprocess import call
 
-labdir = '/home/yln/work/ics46-grading/program2/program2submissions/Lab 2'
-command = "head -5 linked_queue.hpp"
+labdir = '/home/yln/work/ics46-grading/program3/program3submissions/Lab 2'
+command = "head -5 heap_priority_queue.hpp"
 
 
 def main():

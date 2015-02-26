@@ -1,9 +1,12 @@
 import os
 import shutil
 
-labdir = '/home/yln/work/ics46-grading/program2/program2submissions/Lab 2'
+labdir = '/home/yln/work/ics46-grading/program3/program3submissions/Lab 2'
 files = [
-    '/home/yln/work/ics46-grading/program2/xtest_queue.sh'
+    '/home/yln/work/ics46-grading/program3/program3/load.txt',
+    '/home/yln/work/ics46-grading/program3/program3/loadmap.txt',
+    '/home/yln/work/ics46-grading/program3/program3/src/test_priority_queue.cpp',
+    '/home/yln/work/ics46-grading/program3/program3/src/test_map.cpp'
 ]
 
 
