@@ -1,12 +1,13 @@
 import os
 import shutil
 
-labdir = '/home/yln/work/ics46-grading/program3/program3submissions/Lab 2'
+labdir = '/home/yln/work/ics46-grading/program4/program4submissions/Lab 2'
 files = [
-    '/home/yln/work/ics46-grading/program3/program3/load.txt',
-    '/home/yln/work/ics46-grading/program3/program3/loadmap.txt',
-    '/home/yln/work/ics46-grading/program3/program3/src/test_priority_queue.cpp',
-    '/home/yln/work/ics46-grading/program3/program3/src/test_map.cpp'
+    '/home/yln/work/ics46-grading/program4/program4solution/load.txt',
+    '/home/yln/work/ics46-grading/program4/program4solution/loadmap.txt',
+    '/home/yln/work/ics46-grading/program4/program4solution/src/test_map.cpp',
+    '/home/yln/work/ics46-grading/program4/program4solution/src/test_set.cpp',
+    '/home/yln/work/ics46-grading/program4/program4solution/src/set_from_map.hpp'
 ]
 
 
