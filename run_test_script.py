@@ -1,56 +1,28 @@
 import os
 import subprocess
 
-labdir = '/home/yln/work/ics46-grading/program4/program4submissions/Lab 2'
+labdir = '/home/yln/work/ics46-grading/program5/program5submissions/Lab 2'
 tests = [
     [
-        './test_map --gtest_filter=MapTest.empty',
-        './test_map --gtest_filter=MapTest.size',
-        './test_map --gtest_filter=MapTest.has_key',
-        './test_map --gtest_filter=MapTest.has_value',
-        './test_map --gtest_filter=MapTest.put',
-        './test_map --gtest_filter=MapTest.put_index',
-        './test_map --gtest_filter=MapTest.operator_rel',
-        './test_map --gtest_filter=MapTest.operator_stream_insert',
-        './test_map --gtest_filter=MapTest.insert_iterator_param',
-        './test_map --gtest_filter=MapTest.clear',
-        './test_map --gtest_filter=MapTest.erase',
-        './test_map --gtest_filter=MapTest.assignment',
-        './test_map --gtest_filter=MapTest.iterator_plusplus',
-        './test_map --gtest_filter=MapTest.iterator_simple',
-        './test_map --gtest_filter=MapTest.iterator_erase',
-        './test_map --gtest_filter=MapTest.iterator_exception_concurrent_modification_error',
-        './test_map --gtest_filter=MapTest.constructors',
-        './test_map --gtest_filter=MapTest.large_scale',
-        './test_map --gtest_filter=MapTest.large_scale_speed'
+        './test_graph --gtest_filter=MapTest.empty',
+        './test_graph --gtest_filter=MapTest.size',
+        './test_graph --gtest_filter=MapTest.add_node',
+        './test_graph --gtest_filter=MapTest.add_edge1',
+        './test_graph --gtest_filter=MapTest.add_edge2',
+        './test_graph --gtest_filter=MapTest.remove_edge',
+        './test_graph --gtest_filter=MapTest.remove_node',
+        './test_graph --gtest_filter=MapTest.relations',
+        './test_graph --gtest_filter=MapTest.load',
+        './test_graph --gtest_filter=MapTest.store'
     ],
     [
-        './test_set --gtest_filter=SetTest.empty',
-        './test_set --gtest_filter=SetTest.size',
-        './test_set --gtest_filter=SetTest.contains',
-        './test_set --gtest_filter=SetTest.insert',
-        './test_set --gtest_filter=SetTest.operator_rel',
-        './test_set --gtest_filter=SetTest.operator_stream_insert',
-        './test_set --gtest_filter=SetTest.insert_iterator_param',
-        './test_set --gtest_filter=SetTest.contains_iterator_param',
-        './test_set --gtest_filter=SetTest.clear',
-        './test_set --gtest_filter=SetTest.erase',
-        './test_set --gtest_filter=SetTest.erase_iterator_param',
-        './test_set --gtest_filter=SetTest.retains_iterator_param',
-        './test_set --gtest_filter=SetTest.assignment',
-        './test_set --gtest_filter=SetTest.iterator_plusplus',
-        './test_set --gtest_filter=SetTest.iterator_simple',
-        './test_set --gtest_filter=SetTest.iterator_erase',
-        './test_set --gtest_filter=SetTest.iterator_exception_concurrent_modification_error',
-        './test_set --gtest_filter=SetTest.constructors',
-        './test_set --gtest_filter=SetTest.large_scale',
-        './test_set --gtest_filter=SetTest.large_scale_speed'
+        './test_dijkstra --gtest_filter=MapTest.flightdist'
     ]
 ]
 
 gcc_comand_lines = [
-    ('map', 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_map test_map.cpp -lgtest -lcourselib'),
-    ('set', 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_set test_set.cpp -lgtest -lcourselib'),
+    ('graph', 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_graph test_graph.cpp -lgtest -lcourselib'),
+    ('dijkstra', 'g++ -std=c++11 -O0 -g3 -I/home/yln/work/ics46/courselib/src -I/home/yln/work/ics46/googletestlib/include -L/home/yln/work/ics46/courselib/Debug -L/home/yln/work/ics46/googletestlib/make -o test_dijkstra test_dijkstra.cpp -lgtest -lcourselib')
 ]
 
 
@@ -78,14 +50,15 @@ def main():
             for t in testset:
                 res = -1
                 try:
-                    res = subprocess.call(t.split(' '), stdout=fnull, stderr=fnull, timeout=60)
+                    res = subprocess.call(t.split(' '), stdout=fnull, timeout=60)
+                    # res = subprocess.call(t.split(' '), stdout=fnull, stderr=fnull, timeout=60)
                     # res = subprocess.call(t.split(' '), timeout=60)
                 except Exception:
                     pass
                 if res == 0:
                     passing += 1
                 else:
-                    if 'large_scale' in t:
+                    if 'large_scale' in t or 'remove_node' in t:
                         large_fail = True
             print("Passed ", passing, "/", len(testset), ' failed large scale' if large_fail else '')
         proc = input('\nMark as processed? [ENTER]: yes, [n]: no: ')

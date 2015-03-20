@@ -1,8 +1,8 @@
 import os
 from subprocess import call
 
-labdir = '/home/yln/work/ics46-grading/program4/program4submissions/Lab 2'
-command = "head -5 hash_map.hpp"
+labdir = '/home/yln/work/ics46-grading/program5/program5submissions/Lab 2'
+command = "head -5 hash_graph.hpp"
 
 
 def main():

@@ -1,13 +1,17 @@
 import os
 import shutil
 
-labdir = '/home/yln/work/ics46-grading/program4/program4submissions/Lab 2'
+labdir = '/home/yln/work/ics46-grading/program5/program5submissions/Lab 2'
 files = [
-    '/home/yln/work/ics46-grading/program4/program4solution/load.txt',
-    '/home/yln/work/ics46-grading/program4/program4solution/loadmap.txt',
-    '/home/yln/work/ics46-grading/program4/program4solution/src/test_map.cpp',
-    '/home/yln/work/ics46-grading/program4/program4solution/src/test_set.cpp',
-    '/home/yln/work/ics46-grading/program4/program4solution/src/set_from_map.hpp'
+    '/home/yln/work/ics46-grading/program5/test/graph_project/standard.txt',
+    '/home/yln/work/ics46-grading/program5/test/graph_project/src/hash_map.hpp',
+    '/home/yln/work/ics46-grading/program5/test/graph_project/src/hash_set.hpp',
+    '/home/yln/work/ics46-grading/program5/test/graph_project/src/heap_priority_queue.hpp',
+    '/home/yln/work/ics46-grading/program5/test/graph_project/src/test_graph.cpp',
+
+    '/home/yln/work/ics46-grading/program5/test/dijkstra_project/flightdist.txt',
+    '/home/yln/work/ics46-grading/program5/test/dijkstra_project/src/rich_dijkstra.hpp',
+    '/home/yln/work/ics46-grading/program5/test/dijkstra_project/src/test_dijkstra.cpp'
 ]
 
 
